@@ -4,7 +4,7 @@ import in.kyle.ezskypeezlife.EzSkype;
 import in.kyle.ezskypeezlife.api.SkypeCredentials;
 import in.kyle.ezskypeezlife.api.SkypeStatus;
 import in.kyle.ezskypeezlife.events.EventManager;
-import me.imsean.ptpbot.api.mysql.Connection;
+import me.imsean.ptpbot.api.mysql.MySQLConnection;
 import me.imsean.ptpbot.api.mysql.StatsManager;
 import me.imsean.ptpbot.api.mysql.UserManager;
 import me.imsean.ptpbot.api.settings.ConfigManager;
@@ -20,7 +20,7 @@ public class PTPBot {
 
     private static final String owner = "master_zombiecow";
     private static EzSkype skype;
-    private static Connection connection;
+    private static MySQLConnection connection;
     private static UserManager userManager;
     private static StatsManager statsManager;
     private static ConfigManager configManager;
@@ -35,7 +35,7 @@ public class PTPBot {
         return skype;
     }
 
-    public static Connection getConnection() {
+    public static MySQLConnection getConnection() {
         return connection;
     }
 
@@ -87,7 +87,7 @@ public class PTPBot {
 
         configManager = new ConfigManager();
         configManager.loadConfig("config.json");
-        connection = new Connection(configManager.getString("$.mysql.host"), configManager.getString("$.mysql.database"),
+        connection = new MySQLConnection(configManager.getString("$.mysql.host"), configManager.getString("$.mysql.database"),
                 configManager.getString("$.mysql.username"), configManager.getString("$.mysql.password"));
         userManager = new UserManager(skype, connection);
         statsManager = new StatsManager();

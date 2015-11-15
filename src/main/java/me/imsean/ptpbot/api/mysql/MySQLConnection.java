@@ -2,7 +2,7 @@ package me.imsean.ptpbot.api.mysql;
 
 import java.sql.*;
 
-public class Connection {
+public class MySQLConnection {
 
     static final String DRIVER = "com.mysql.jdbc.Driver";
 
@@ -13,7 +13,7 @@ public class Connection {
     private PreparedStatement stmt = null;
 
 
-    public Connection(String host, String database, String username, String password) {
+    public MySQLConnection(String host, String database, String username, String password) {
         this.host = host;
         this.name = database;
         this.username = username;
@@ -29,7 +29,7 @@ public class Connection {
         }
     }
 
-    public Connection query(String sql) {
+    public MySQLConnection query(String sql) {
         try {
             this.stmt = conn.prepareStatement(sql);
         } catch (SQLException e) {

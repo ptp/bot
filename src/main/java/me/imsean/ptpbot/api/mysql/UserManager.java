@@ -17,9 +17,9 @@ import java.util.List;
 public class UserManager {
 
     private final EzSkype skype;
-    private final Connection connection;
+    private final MySQLConnection connection;
 
-    public UserManager(EzSkype skype, Connection connection) {
+    public UserManager(EzSkype skype, MySQLConnection connection) {
         this.skype = skype;
         this.connection = connection;
     }

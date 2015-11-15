@@ -14,7 +14,7 @@ public class StatsManager {
 
     private final UserManager userManager;
     private final ConfigManager configManager;
-    private final Connection connection;
+    private final MySQLConnection connection;
 
     public StatsManager() {
         this.userManager = PTPBot.getUserManager();
