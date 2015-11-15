@@ -25,10 +25,10 @@ public class StatsManager {
     public int getMessageCount() {
         int messages = 0;
         try {
-            PreparedStatement stmt = this.connection.query("SELECT `messages` FROM `stats`").getStatement();
+            PreparedStatement stmt = this.connection.query("SELECT `counter` FROM `messages`").getStatement();
             ResultSet result = this.connection.execute();
             while(result.next()) {
-                messages = result.getInt("messages");
+                messages = result.getInt("counter");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,8 +44,7 @@ public class StatsManager {
 
     public void addMessages() {
         try {
-            PreparedStatement stmt = this.connection.query("INSERT INTO `stats` (`messages`) VALUES(?)").getStatement();
-            stmt.setInt(1, (int)Math.random() * 1000);
+            PreparedStatement stmt = this.connection.query("UPDATE `messages` SET `counter` = `counter` + 1").getStatement();
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

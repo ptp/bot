@@ -91,16 +91,16 @@ public class GroupManageCommand extends Command {
                 Thread thread = new Thread(() -> {
                     List<String> participants = new ArrayList<String>();
 
-                    String users = "";
-                    users.concat(Chat.bold(StringUtils.abbreviate("[" + group.getTopic(), 25) + "] Participants [" + group.getUsers().size() + "]") + "\n");
+                    StringBuilder users = new StringBuilder();
+                    users.append(Chat.bold(StringUtils.abbreviate("[" + group.getTopic(), 25) + "] Participants [" + group.getUsers().size() + "]") + "\n");
 
                     group.getUsers().forEach((participant) -> {
                         participants.add((userManager.isBotAdmin(participant) ? Chat.bold("[bot_admin] ") : "") + (userManager.isGroupAdmin(group, participant.getUsername()) ? Chat.bold("[group_admin] ") : "") + participant.getUsername());
                     });
 
-                    users.concat(StringUtils.join(participants.iterator(), ", "));
+                    users.append(StringUtils.join(participants.iterator(), ", "));
 
-                    userList.edit(users);
+                    userList.edit(users.toString());
                 });
                 thread.start();
             }

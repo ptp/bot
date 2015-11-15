@@ -35,15 +35,15 @@ public class ContactsCommand extends Command {
             if(args.length > 0) {
                 if(args[0].equalsIgnoreCase("list")) {
                     List<String> contactList = new ArrayList<String>();
-                    String contacts = "";
-                    contacts.concat("PTPBot Contact List - \n");
+                    StringBuilder contacts = new StringBuilder();
+                    contacts.append("PTPBot Contact List - \n");
 
                     PTPBot.getSkype().getLocalUser().getContacts().forEach((consumer, contact) -> {
                         contactList.add((userManager.isBotAdmin(contact) ? Chat.bold("[bot_admin] ") : "") + contact.getUsername());
                     });
-                    contacts.concat(StringUtils.join(contactList.iterator(), ", "));
+                    contacts.append(StringUtils.join(contactList.iterator(), ", "));
 
-                    group.sendMessage(contacts);
+                    group.sendMessage(contacts.toString());
                 }
                 if(args[0].equalsIgnoreCase("add")) {
                     if(args[1].isEmpty()) {
