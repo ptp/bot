@@ -1,0 +1,13 @@
+{
+  "skype": {
+    "username": "bot",
+    "password": "bot.password"
+  },
+  "mysql": {
+    "host": "127.0.0.1",
+    "username": "root",
+    "password": "root",
+    "database": "ptpbot"
+  },
+  "discord": "https://discordapp.com/invite/0aP84TuSdYD6fAFr"
+}

@@ -1,0 +1,6 @@
+target/
+out/
+logs/
+.idea/
+*.iml
+config.json
