@@ -20,7 +20,7 @@ import java.util.List;
 public class GroupManageCommand extends Command {
 
     private UserManager userManager;
-    private String usage = "Usage: #group (kick/kickall/setadmin/add/listusers) (user) (boolean)";
+    private String usage = "Usage: group (kick/kickall/setadmin/add/listusers) (user) (boolean)";
 
     public GroupManageCommand(UserManager userManager) {
         super(SkypeUserRole.ADMIN, "Manage group", CommandCategory.INFORMATIVE, "group");

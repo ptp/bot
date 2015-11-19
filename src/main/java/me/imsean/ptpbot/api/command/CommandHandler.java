@@ -10,11 +10,12 @@ import me.imsean.ptpbot.api.settings.ConfigManager;
 import me.imsean.ptpbot.commands.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CommandHandler {
 
-    public static final String prefix = "#";
+    public static final String prefix = ".";
 
     private UserManager userManager;
     private StatsManager statsManager;
@@ -25,7 +26,7 @@ public class CommandHandler {
         this.userManager = userManager;
         this.configManager = configManager;
         this.statsManager = statsManager;
-        this.commands = new ArrayList<Command>();
+        this.commands = new ArrayList<>();
 
         addCommands(
                 new BanFromGroupCommand(this.userManager),
@@ -41,7 +42,8 @@ public class CommandHandler {
                 new DancePartyCommand(this.userManager),
                 new HelpCommand(this.userManager, this),
                 new ColorCommand(),
-                new IgnoreCommand(this.userManager)
+                new IgnoreCommand(this.userManager),
+                new ImageCommand()
         );
     }
 
@@ -50,21 +52,17 @@ public class CommandHandler {
     }
 
     private void addCommands(Command... commands) {
-        for (Command c : commands) {
-            this.commands.add(c);
-        }
+        Collections.addAll(this.commands, commands);
     }
 
 
     public void handleCommand(SkypeConversation group, SkypeUser user, SkypeMessage message) {
         String input = message.getMessage();
-        String id = group.getLongId();
 
         if (!input.startsWith(prefix)) return;
 
         String noPrefix = input.substring(prefix.length());
         String[] args = noPrefix.split(" ");
-        String command = args[0];
 
         for (Command c : commands) {
             for (String name : c.getNames()) {

@@ -25,7 +25,7 @@ public class ColorCommand extends Command {
     @Override
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
         if(args.length == 0) {
-            group.sendMessage(user.getUsername() + " - Usage: #color (image/literal) (color) (text)");
+            group.sendMessage(user.getUsername() + " - Usage: color (image/literal) (color) (text)");
         }
         if(args.length > 0) {
             if(args[0].equalsIgnoreCase("image")) {

@@ -30,7 +30,7 @@ public class ContactsCommand extends Command {
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
         if(this.userManager.isBotAdmin(user)) {
             if(args.length == 0) {
-                group.sendMessage(user.getUsername() + " - Usage: #contacts (list/add/remove) (username)");
+                group.sendMessage(user.getUsername() + " - Usage: contacts (list/add/remove) (username)");
             }
             if(args.length > 0) {
                 if(args[0].equalsIgnoreCase("list")) {

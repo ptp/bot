@@ -8,6 +8,7 @@ import me.imsean.ptpbot.PTPBot;
 import me.imsean.ptpbot.api.command.Command;
 import me.imsean.ptpbot.api.command.CommandCategory;
 import me.imsean.ptpbot.api.mysql.UserManager;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Created by sean on 11/15/15.
@@ -21,13 +22,20 @@ public class IgnoreCommand extends Command {
         this.userManager = userManager;
     }
 
+    @Override
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
+        if(!this.userManager.isBotAdmin(user)) return;
         if(args.length == 0) {
-            group.sendMessage(user.getUsername() + " - Usage: #ignore (username) (boolean)");
+            group.sendMessage(user.getUsername() + " - Usage: ignore (list) (username) (boolean)");
+        }
+        if(args.length > 0) {
+            if(args[0].equalsIgnoreCase("list")) {
+                group.sendMessage("PTPBot Ignore List - \n" + StringUtils.join(this.userManager.getIgnoreList().iterator(), ", "));
+            }
         }
         if(args.length == 2) {
             if(args[0].isEmpty() || args[1].isEmpty()) {
-                group.sendMessage(user.getUsername() + " - Usage: #ignore (username) (boolean)");
+                group.sendMessage(user.getUsername() + " - Usage: ignore (username) (boolean)");
                 return;
             }
             String username = args[0];
@@ -47,8 +55,6 @@ public class IgnoreCommand extends Command {
                 this.userManager.unIgnoreUser(username);
                 group.sendMessage(user.getUsername() + " - " + username + " is no longer being ignored");
             }
-        } else {
-            group.sendMessage(user.getUsername() + " - Usage: #ignore (username) (boolean)");
         }
     }
 

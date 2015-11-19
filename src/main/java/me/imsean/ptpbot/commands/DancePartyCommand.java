@@ -26,7 +26,7 @@ public class DancePartyCommand extends Command {
         if(this.userManager.isBotAdmin(user)) {
 
             if(args.length == 0) {
-                group.sendMessage(user.getUsername() + " - Usage: #dp (message)");
+                group.sendMessage(user.getUsername() + " - Usage: dp (message)");
                 return;
             }
 

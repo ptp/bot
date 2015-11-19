@@ -25,13 +25,12 @@ public class HelpCommand extends Command {
 
     @Override
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
-        //if(!this.userManager.isBotAdmin(user)) return;
         Thread thread = new Thread(() -> {
             if(args.length == 0) {
                 StringBuilder helpMenu = new StringBuilder();
                 CommandCategory[] categories = CommandCategory.values();
-                for(int i = 0; i < categories.length; i++) {
-                    helpMenu.append("#help " + categories[i].name().toLowerCase() + "\n");
+                for (CommandCategory category : categories) {
+                    helpMenu.append(CommandHandler.prefix + "help ").append(category.name().toLowerCase()).append("\n");
                 }
                 group.sendMessage(helpMenu.toString());
                 return;
@@ -43,9 +42,17 @@ public class HelpCommand extends Command {
                     this.commandHandler.getCommands().forEach((command) -> {
                         if(command.getCategory() == CommandCategory.ADMINISTRATIVE) {
                             if(this.userManager.isBotAdmin(user)) {
-                                commands.append("#" + command.getNames()[0] + " - " + command.getUsage() + "\n");
+                                commands
+                                        .append(CommandHandler.prefix)
+                                        .append(command.getNames()[0])
+                                        .append(" - ")
+                                        .append(command.getUsage()).append("\n");
                             } else if(command.getRole() == SkypeUserRole.USER) {
-                                commands.append("#" + command.getNames()[0] + " - " + command.getUsage() + "\n");
+                                commands
+                                        .append(CommandHandler.prefix)
+                                        .append(command.getNames()[0])
+                                        .append(" - ")
+                                        .append(command.getUsage()).append("\n");
                             }
                         }
                     });
@@ -60,9 +67,13 @@ public class HelpCommand extends Command {
                     this.commandHandler.getCommands().forEach((command) -> {
                         if(command.getCategory() == CommandCategory.INFORMATIVE) {
                             if(this.userManager.isBotAdmin(user)) {
-                                commands.append("#" + command.getNames()[0] + " - " + command.getUsage() + "\n");
+                                commands.append(CommandHandler.prefix).append(command.getNames()[0]).append(" - ").append(command.getUsage()).append("\n");
                             } else if(command.getRole() == SkypeUserRole.USER) {
-                                commands.append("#" + command.getNames()[0] + " - " + command.getUsage() + "\n");
+                                commands
+                                        .append(CommandHandler.prefix)
+                                        .append(command.getNames()[0])
+                                        .append(" - ")
+                                        .append(command.getUsage()).append("\n");
                             }
                         }
                     });
@@ -77,9 +88,15 @@ public class HelpCommand extends Command {
                     this.commandHandler.getCommands().forEach((command) -> {
                         if(command.getCategory() == CommandCategory.FUN) {
                             if(this.userManager.isBotAdmin(user)) {
-                                commands.append("#" + command.getNames()[0] + " - " + command.getUsage() + "\n");
+                                commands
+                                        .append(CommandHandler.prefix)
+                                        .append(command.getNames()[0])
+                                        .append(" - ")
+                                        .append(command.getUsage()).append("\n");
                             } else if(command.getRole() == SkypeUserRole.USER) {
-                                commands.append("#" + command.getNames()[0] + " - " + command.getUsage() + "\n");
+                                commands
+                                        .append(CommandHandler.prefix).append(command.getNames()[0])
+                                        .append(" - ").append(command.getUsage()).append("\n");
                             }
                         }
                     });
@@ -90,19 +107,6 @@ public class HelpCommand extends Command {
                     group.sendMessage(commands.toString());
                 }
             }
-//            StringBuilder commands = new StringBuilder();
-//            commands.append("Available Commands - ");
-//            for(Command command : this.commandHandler.getCommands()) {
-//                if(this.userManager.isBotAdmin(user)) {
-//                    commands.append("\n#" + command.getNames()[0] + " - " + command.getUsage());
-//                } else {
-//                    if(command.getRole() == SkypeUserRole.USER) {
-//                        commands.append("\n#" + command.getNames()[0] + " - " + command.getUsage());
-//                    }
-//                }
-//                //commands.append("\n #" + command.getNames()[0] + " - " + command.getUsage() + " - " + (command.getRole() == SkypeUserRole.ADMIN ? "admin only" : "public command"));
-//            }
-//            group.sendMessage(commands.toString());
         });
         thread.start();
     }

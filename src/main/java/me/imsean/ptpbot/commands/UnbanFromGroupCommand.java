@@ -23,7 +23,7 @@ public class UnbanFromGroupCommand extends Command {
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
         if (this.userManager.isBotAdmin(user)) {
             if(args.length == 0) {
-                group.sendMessage(user.getUsername() + " - Usage: #unban (username)");
+                group.sendMessage(user.getUsername() + " - Usage: unban (username)");
             }
             if(args.length > 0) {
                 try {

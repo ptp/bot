@@ -25,7 +25,7 @@ public class AdminsCommand extends Command {
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
         if (this.userManager.isBotOwner(user)) {
             if(args.length == 0) {
-                group.sendMessage(user.getUsername() + " - Usage: #admins (add/remove/list) (username)");
+                group.sendMessage(user.getUsername() + " - Usage: admins (add/remove/list) (username)");
             }
             if(args.length > 0) {
                 if(args[0].equalsIgnoreCase("add")) {

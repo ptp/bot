@@ -116,7 +116,7 @@ public class UserManager {
             stmt.setString(1, user.getUsername());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to execute query!", e);
         }
     }
 
@@ -126,7 +126,7 @@ public class UserManager {
             stmt.setString(1, username);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to execute query!", e);
         }
     }
 
@@ -136,7 +136,7 @@ public class UserManager {
             stmt.setString(1, user.getUsername());
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to execute query!", e);
         }
     }
 
@@ -146,7 +146,7 @@ public class UserManager {
             stmt.setString(1, username);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to execute query!", e);
         }
     }
 
@@ -158,9 +158,22 @@ public class UserManager {
                 admins.add(results.getString("username"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to execute query!", e);
         }
         return admins;
+    }
+
+    public List<String> getIgnoreList() {
+        List<String> ignored = new ArrayList<String>();
+        try {
+            ResultSet results = this.connection.query("SELECT * FROM `ignored`").execute();
+            while(results.next()) {
+                ignored.add(results.getString("username"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed to execute query!", e);
+        }
+        return ignored;
     }
 
     public List<String> getBanList(SkypeConversation group) {
@@ -173,7 +186,7 @@ public class UserManager {
                 banList.add(results.getString("username"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to execute query!", e);
         }
         return banList;
     }

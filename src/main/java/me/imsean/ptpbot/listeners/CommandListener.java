@@ -31,8 +31,8 @@ public class CommandListener implements SkypeEvent {
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("[" + StringUtils.abbreviate(e.getMessage().getConversation().getTopic(), 15) + "] ");
-        builder.append(e.getMessage().getSender().getDisplayName() + " (" + e.getMessage().getSender().getUsername() + ") : ");
+        builder.append("[" + StringUtils.abbreviate(e.getMessage().getConversation().getTopic(), 15) + "]");
+        builder.append(e.getMessage().getSender().getDisplayName().orElse(" ") + " (" + e.getMessage().getSender().getUsername() + ") : ");
         builder.append(e.getMessage().getMessage());
         System.out.println(builder.toString());
     }

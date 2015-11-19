@@ -34,7 +34,7 @@ public class StatsCommand extends Command {
             stats.append("\n Received " + this.statsManager.getMessageCount() + " messages");
             stats.append("\n Added " + PTPBot.getSkype().getLocalUser().getContacts().size() + " contacts");
             stats.append("\n Implemented " + this.statsManager.getCommandCount() + " commands");
-            stats.append("\n Part of " + PTPBot.getSkype().getConversations().size() + " conversations");
+            stats.append("\n Participating in " + PTPBot.getSkype().getConversations().size() + " conversations");
             stats.append("\n Uptime " + DurationFormatUtils.formatPeriod(start, finish, "d 'days,' H 'hours,' m 'mins and' s 'seconds'"));
             group.sendMessage(stats.toString());
 

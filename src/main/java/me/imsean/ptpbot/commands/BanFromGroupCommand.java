@@ -21,12 +21,10 @@ public class BanFromGroupCommand extends Command {
 
     @Override
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
-        if (!this.userManager.isBotAdmin(user)) {
-            return;
-        }
+        if (!this.userManager.isBotAdmin(user)) return;
 
         if(args.length == 0) {
-            group.sendMessage(user.getUsername() + " - Usage: #ban (username)");
+            group.sendMessage(user.getUsername() + " - Usage: ban (username)");
         }
         if(args.length > 0) {
             if(args[0].equalsIgnoreCase(PTPBot.getOwner()) || args[0].equalsIgnoreCase(PTPBot.getSkype().getLocalUser().getUsername())) {

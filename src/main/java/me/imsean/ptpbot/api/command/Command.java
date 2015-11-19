@@ -34,5 +34,7 @@ public abstract class Command {
         return names;
     }
 
+    public String getPrefix() { return CommandHandler.prefix; }
+
     public abstract void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args);
 }

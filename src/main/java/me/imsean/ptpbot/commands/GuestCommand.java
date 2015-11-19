@@ -29,7 +29,7 @@ public class GuestCommand extends Command {
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
         if(!this.userManager.isBotAdmin(user)) return;
         if(args.length == 0) {
-            group.sendMessage(user.getUsername() + " - Usage: #guests (remove/list)");
+            group.sendMessage(user.getUsername() + " - Usage: guests (remove/list)");
         }
         if(args.length > 0) {
             if(args[0].equalsIgnoreCase("list")) {

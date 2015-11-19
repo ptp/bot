@@ -74,7 +74,7 @@ public class PTPBot {
                     }
                 }
             };
-            timer.scheduleAtFixedRate(threeHrTask, 0L, 1000 * 60 * 360);
+            timer.schedule(threeHrTask, 1000 * 60 * 360, 1000 * 60 * 360);
 
             System.out.println("Successfully logged in!");
         } catch (Exception e) {
@@ -96,12 +96,32 @@ public class PTPBot {
         System.out.println("PTPBot has started!");
     }
 
+    public void reload() {
+        /* Ignore this PLS */
+        this.running = false;
+
+        configManager = null;
+        connection = null;
+        configManager = null;
+        userManager = null;
+        statsManager = null;
+
+        configManager = new ConfigManager();
+        configManager.loadConfig("config.json");
+        connection = new MySQLConnection(configManager.getString("$.mysql.host"), configManager.getString("$.mysql.database"),
+                configManager.getString("$.mysql.username"), configManager.getString("$.mysql.password"));
+        userManager = new UserManager(skype, connection);
+        statsManager = new StatsManager();
+
+        registerListeners();
+
+        this.running = true;
+    }
+
     public void stop() {
         this.running = false;
         skype.logout();
         skype = null;
-        //discord.stop();
-        //discord = null;
         configManager = null;
         connection = null;
         userManager = null;
