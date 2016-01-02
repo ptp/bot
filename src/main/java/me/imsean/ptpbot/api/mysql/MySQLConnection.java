@@ -22,9 +22,7 @@ public class MySQLConnection {
         try {
             Class.forName(DRIVER);
             conn = DriverManager.getConnection("jdbc:mysql://" + this.host + "/" + this.name, this.username, this.password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }

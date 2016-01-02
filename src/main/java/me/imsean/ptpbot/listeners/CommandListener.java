@@ -23,16 +23,14 @@ public class CommandListener implements SkypeEvent {
 
     public void onCommand(SkypeMessageReceivedEvent e) {
         if(!e.getMessage().isEdited()) {
-            if(e.getMessage().getMessage().startsWith(CommandHandler.prefix)) {
-                if(PTPBot.getSkype().getLocalUser().getUsername().equalsIgnoreCase(e.getMessage().getSender().getUsername())) return;
-                if(this.userManager.isIgnored(e.getMessage().getSender().getUsername())) return;
-                this.commandHandler.handleCommand(e.getMessage().getConversation(), e.getMessage().getSender(), e.getMessage());
-            }
+            if(PTPBot.getSkype().getLocalUser().getUsername().equalsIgnoreCase(e.getMessage().getSender().getUsername())) return;
+            if(this.userManager.isIgnored(e.getMessage().getSender().getUsername())) return;
+            this.commandHandler.handleCommand(e.getMessage().getConversation(), e.getMessage().getSender(), e.getMessage());
         }
 
         StringBuilder builder = new StringBuilder();
-        builder.append("[" + StringUtils.abbreviate(e.getMessage().getConversation().getTopic(), 15) + "]");
-        builder.append(e.getMessage().getSender().getDisplayName().orElse(" ") + " (" + e.getMessage().getSender().getUsername() + ") : ");
+        builder.append("[" + StringUtils.abbreviate(e.getMessage().getConversation().getTopic(), 15) + "] ");
+        builder.append(e.getMessage().getSender().getDisplayName().orElse(" ") + "(" + e.getMessage().getSender().getUsername() + ") : ");
         builder.append(e.getMessage().getMessage());
         System.out.println(builder.toString());
     }

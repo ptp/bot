@@ -41,9 +41,11 @@ public class CommandHandler {
                 new GroupManageCommand(this.userManager),
                 new DancePartyCommand(this.userManager),
                 new HelpCommand(this.userManager, this),
-                new ColorCommand(),
                 new IgnoreCommand(this.userManager),
-                new ImageCommand()
+                new ImageCommand(),
+                new UrbanCommand(),
+                new ReloadCommand(),
+                new MDNCommand()
         );
     }
 
@@ -57,7 +59,7 @@ public class CommandHandler {
 
 
     public void handleCommand(SkypeConversation group, SkypeUser user, SkypeMessage message) {
-        String input = message.getMessage();
+        String input = message.getMessage().trim();
 
         if (!input.startsWith(prefix)) return;
 

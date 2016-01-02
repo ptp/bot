@@ -4,6 +4,7 @@ import in.kyle.ezskypeezlife.events.SkypeEvent;
 import in.kyle.ezskypeezlife.events.conversation.SkypeMessageReceivedEvent;
 import me.imsean.ptpbot.PTPBot;
 import me.imsean.ptpbot.api.mysql.StatsManager;
+import me.imsean.ptpbot.commands.StatsCommand;
 
 public class StatsMessageCountListener implements SkypeEvent {
 
@@ -16,6 +17,7 @@ public class StatsMessageCountListener implements SkypeEvent {
     public void onMessage(SkypeMessageReceivedEvent e) {
         if(e.getMessage().getSender().getUsername().equals(PTPBot.getSkype().getLocalUser().getUsername())) return;
         this.statsManager.addMessages();
+        StatsCommand.recentMessageCount++;
     }
 
 }

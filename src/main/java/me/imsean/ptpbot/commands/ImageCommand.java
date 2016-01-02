@@ -56,7 +56,7 @@ public class ImageCommand extends Command {
                 String href = link.attr("href");
                 try {
                     URL website = new URL(href);
-                    ASCIIArtGen gen = new ASCIIArtGen(new Font("SansSerif", Font.PLAIN, 24));
+                    ASCIIArtGen gen = new ASCIIArtGen(new Font("SansSerif", Font.TRUETYPE_FONT, 24));
                     BufferedImage image = ImageIO.read(website);
                     String url = paste(gen.convert(image, 200));
                     art.edit(Chat.link(RandomStringUtils.randomAlphabetic(24) + ".ascii", url));

@@ -21,7 +21,7 @@ public class ReloadCommand extends Command {
     public void onCommand(SkypeMessage message, SkypeConversation group, SkypeUser user, String[] args) {
         if(PTPBot.getOwner().equals(user.getUsername())) {
             PTPBot bot = new PTPBot();
-            bot.reload();
+            bot.reload(group);
         }
     }
 

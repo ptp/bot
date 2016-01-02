@@ -41,36 +41,11 @@ public class DancePartyCommand extends Command {
                 }
             });
             thread.start();
-
-//            Thread thread = new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    Random rn = new Random();
-//                    int range = 20 + rn.nextInt(200 - 20 + 1);
-//                    for(int i = 0; i < range; i++) {
-//                        amazingWords.append(Chat.color(getRandomWord(25), hexCodeGenerator()));
-//                    }            try {
-//                        TimeUnit.SECONDS.sleep(5);
-//                        amazing.edit(amazingWords.toString());
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            });
-//            thread.start();
         }
-    }
-
-    public String getRandomWord(int length) {
-        String r = "";
-        for(int i = 0; i < length; i++) {
-            r += (char)(Math.random() * 26 + 97);
-        }
-        return r;
     }
 
     public String hexCodeGenerator() {
-        String[] letters = new String[15];
+        String[] letters;
         letters = "0123456789ABCDEF".split("");
         String code ="#";
         for(int i = 0; i < 6; i++) {

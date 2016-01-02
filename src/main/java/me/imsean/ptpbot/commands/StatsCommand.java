@@ -18,6 +18,8 @@ public class StatsCommand extends Command {
 
     private long start = System.currentTimeMillis();
 
+    public static int recentMessageCount = 0;
+
     public StatsCommand(UserManager userManager, StatsManager statsManager) {
         super(SkypeUserRole.ADMIN, "Display various bot statistics", CommandCategory.INFORMATIVE, "stats", "statistics");
         this.userManager = userManager;
@@ -31,11 +33,10 @@ public class StatsCommand extends Command {
 
             StringBuilder stats = new StringBuilder();
             stats.append("PTPBot Statistics - ");
-            stats.append("\n Received " + this.statsManager.getMessageCount() + " messages");
-            stats.append("\n Added " + PTPBot.getSkype().getLocalUser().getContacts().size() + " contacts");
-            stats.append("\n Implemented " + this.statsManager.getCommandCount() + " commands");
-            stats.append("\n Participating in " + PTPBot.getSkype().getConversations().size() + " conversations");
-            stats.append("\n Uptime " + DurationFormatUtils.formatPeriod(start, finish, "d 'days,' H 'hours,' m 'mins and' s 'seconds'"));
+            stats.append("\n").append(String.format("%,d", this.statsManager.getMessageCount())).append(" total messages received");
+            stats.append("\n").append(String.format("%,d", recentMessageCount)).append(" messages received");
+            stats.append("\n").append(PTPBot.getSkype().getConversations().size()).append(" groups");
+            stats.append("\n").append(DurationFormatUtils.formatPeriod(start, finish, "'spent' d 'days,' H 'hours,' m 'mins and' s 'seconds online'"));
             group.sendMessage(stats.toString());
 
         }
